@@ -1,8 +1,8 @@
 substitutions:
-  _SERVICE: "order-helper-backend-demo"   # αλλάζει από trigger
-  _REGION: "europe-west1"                 # αλλάζει από trigger
+  _SERVICE: "order-helper-backend-demo"  # αλλάζει από trigger
+  _REGION: "europe-west1"                # αλλάζει από trigger
   _SERVICE_ACCOUNT: "cloudrun-exec-demo@mail-order-helper-enterprise.iam.gserviceaccount.com"  # αλλάζει από trigger
-  _IMAGE: "order-helper-backend-demo"     # αλλάζει από trigger
+  _IMAGE: "order-helper-backend-demo"    # αλλάζει από trigger
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
@@ -24,3 +24,7 @@ steps:
 
 images:
   - 'gcr.io/$PROJECT_ID/${_IMAGE}:$COMMIT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  logStreamingOption: STREAM_ON
