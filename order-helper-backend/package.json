@@ -1,0 +1,27 @@
+{
+  "name": "order-helper-backend",
+  "version": "1.0.0",
+  "description": "Order Helper Backend - Express + Firestore + Gmail OAuth",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csv-parse": "^6.1.0",
+    "csv-stringify": "^6.6.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "firebase-admin": "^12.7.0",
+    "googleapis": "^133.0.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.11",
+    "papaparse": "^5.4.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "aibuildhubs",
+  "license": "MIT"
+}
