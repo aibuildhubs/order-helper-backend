@@ -9,7 +9,7 @@ COPY package*.json ./
 RUN npm install --omit=dev
 
 # ✅ Copy service account file explicitly into container
-COPY firebase-service-account.json ./firebase-service-account.json
+# COPY firebase-service-account.json ./firebase-service-account.json
 
 # Copy all remaining source files
 COPY . .
