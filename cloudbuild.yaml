@@ -1,0 +1,25 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'run',
+        'deploy',
+        'order-helper-backend',
+        '--image',
+        'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA',
+        '--region',
+        'europe-west1',
+        '--platform',
+        'managed',
+        '--allow-unauthenticated'
+      ]
+
+images:
+  - 'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA'
