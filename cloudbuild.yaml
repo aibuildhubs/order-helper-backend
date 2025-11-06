@@ -1,25 +1,26 @@
+substitutions:
+  _SERVICE: "order-helper-backend-demo"   # αλλάζει από trigger
+  _REGION: "europe-west1"                 # αλλάζει από trigger
+  _SERVICE_ACCOUNT: "cloudrun-exec-demo@mail-order-helper-enterprise.iam.gserviceaccount.com"  # αλλάζει από trigger
+  _IMAGE: "order-helper-backend-demo"     # αλλάζει από trigger
+
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA', '.']
+    args: ['build','-t','gcr.io/$PROJECT_ID/${_IMAGE}:$COMMIT_SHA','.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA']
+    args: ['push','gcr.io/$PROJECT_ID/${_IMAGE}:$COMMIT_SHA']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       [
-        'run',
-        'deploy',
-        'order-helper-backend',
-        '--image',
-        'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA',
-        '--region',
-        'europe-west1',
-        '--platform',
-        'managed',
-        '--allow-unauthenticated'
+        'run','deploy','${_SERVICE}',
+        '--image=gcr.io/$PROJECT_ID/${_IMAGE}:$COMMIT_SHA',
+        '--region','${_REGION}',
+        '--allow-unauthenticated',
+        '--service-account','${_SERVICE_ACCOUNT}'
       ]
 
 images:
-  - 'gcr.io/mail-order-helper-enterprise/order-helper-backend:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/${_IMAGE}:$COMMIT_SHA'
