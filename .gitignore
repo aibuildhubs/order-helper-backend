@@ -84,8 +84,7 @@ dist
 
 # Gatsby files
 .cache/
-# Comment in the public line in if your project uses Gatsby and not Next.js
-# https://nextjs.org/blog/next-9-1#public-directory-support
+# Comment in the public line if your project uses Gatsby and not Next.js
 # public
 
 # vuepress build output
@@ -137,3 +136,8 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# 🔒 Firebase & Service Account Keys (excluded for security)
+firebase-service-account.json
+serviceAccountKey.json
+mail-order-helper-enterprise-firebase-adminsdk-fbsvc-178e4e84fd.json
